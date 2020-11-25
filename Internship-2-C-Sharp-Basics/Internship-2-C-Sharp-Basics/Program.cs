@@ -64,6 +64,7 @@ namespace Internship_2_C_Sharp_Basics
                     }
                     else
                     {
+                        Console.Clear();
                         InputError();
                         goto Case2;
                     }
@@ -87,6 +88,7 @@ namespace Internship_2_C_Sharp_Basics
                     }
                     if (flag3 == 0)
                     {
+                        Console.Clear();
                         InputError();
                         goto Case3;
                     }
@@ -124,6 +126,7 @@ namespace Internship_2_C_Sharp_Basics
                         }
                         else
                         {
+                            Console.Clear();
                             Console.WriteLine("Ta pjesma je vec na listi. Pokusajte ponovno.");
                             goto Case4;
                         }
@@ -140,8 +143,12 @@ namespace Internship_2_C_Sharp_Basics
                     }
                 case 5:
                     Console.Clear();
-                    Case5:
-                    Console.WriteLine("Unesite redni broj pjesme koju zelite obrisati:           (0 za povratak)");
+                Case5:
+                    foreach (KeyValuePair<int, string> kvp in listaPjesama)
+                    {
+                        Console.WriteLine(kvp.Key + " " + kvp.Value);
+                    }
+                    Console.WriteLine("\nUnesite redni broj pjesme koju zelite obrisati:           (0 za povratak)");
                     var brojBrisanje = int.Parse(Console.ReadLine());
                     if (brojBrisanje == 0)
                     {
@@ -171,6 +178,7 @@ namespace Internship_2_C_Sharp_Basics
                         }
                         else
                         {
+                            Console.Clear();
                             InputError();
                             goto Case5;
                         }
@@ -191,7 +199,11 @@ namespace Internship_2_C_Sharp_Basics
                 case 6:
                     Console.Clear();
                 Case6:
-                    Console.WriteLine("Unesite ime pjesme koju zelite obrisati:           (0 za povratak)");
+                    foreach (KeyValuePair<int, string> kvp in listaPjesama)
+                    {
+                        Console.WriteLine(kvp.Key + " " + kvp.Value);
+                    }
+                    Console.WriteLine("\nUnesite ime pjesme koju zelite obrisati:           (0 za povratak)");
                     var imeBrisanje = Console.ReadLine();
                     if (imeBrisanje == "0")
                     {
@@ -206,7 +218,7 @@ namespace Internship_2_C_Sharp_Basics
                         var broj6 = 0;
                         foreach (KeyValuePair<int, string> kvp6 in listaPjesama)
                         {
-                            if (kvp6.Value == imeBrisanje)
+                            if (kvp6.Value.Contains(imeBrisanje))
                             {
                                 broj6 = kvp6.Key;
                             }
@@ -229,6 +241,7 @@ namespace Internship_2_C_Sharp_Basics
                         }
                         else
                         {
+                            Console.Clear();
                             InputError();
                             goto Case6;
                         }
@@ -271,7 +284,11 @@ namespace Internship_2_C_Sharp_Basics
                 case 8:
                     Console.Clear();
                     Case8:
-                    Console.WriteLine("Unesite redni broj pjesme koju zelite urediti.           (0 za povratak)");
+                    foreach (KeyValuePair<int, string> kvp in listaPjesama)
+                    {
+                        Console.WriteLine(kvp.Key + " " + kvp.Value);
+                    }
+                    Console.WriteLine("\nUnesite redni broj pjesme koju zelite urediti.           (0 za povratak)");
                     var redniBroj8 = int.Parse(Console.ReadLine());
                     if (redniBroj8 == 0)
                     {
@@ -303,6 +320,7 @@ namespace Internship_2_C_Sharp_Basics
                             }
                             else
                             {
+                                Console.Clear();
                                 Console.WriteLine("Ta pjesma je vec na listi. Pokusajte ponovo.");
                                 goto Case8;
                             }
@@ -314,12 +332,14 @@ namespace Internship_2_C_Sharp_Basics
                         }
                         else
                         {
+                            Console.Clear();
                             InputError();
                             goto Check8;
                         }
                     }
                     else
                     {
+                        Console.Clear();
                         InputError();
                         goto Case8;
                     }
@@ -407,18 +427,21 @@ namespace Internship_2_C_Sharp_Basics
                             }
                             else
                             {
+                                Console.Clear();
                                 InputError();
                                 goto Check9;
                             }
                         }
                         else
                         {
+                            Console.Clear();
                             InputError();
                             goto Case9;
                         }
                     }
                     else
                     {
+                        Console.Clear();
                         InputError();
                         goto Case9;
                     }
