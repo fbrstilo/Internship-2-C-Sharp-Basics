@@ -51,6 +51,7 @@ namespace Internship_2_C_Sharp_Basics
                             if (redniBroj == kvp.Key)
                             {
                                 Console.WriteLine("Pjesma rednog broja " + redniBroj + " je " + kvp.Value);
+                                break;
                             }
                         }
                         Return();
@@ -63,7 +64,7 @@ namespace Internship_2_C_Sharp_Basics
                     }
                     else
                     {
-                        Console.WriteLine("Krivi unos. Pokusajte ponovo.");
+                        InputError();
                         goto Case2;
                     }
                 case 3:
@@ -79,15 +80,14 @@ namespace Internship_2_C_Sharp_Basics
                     int flag3 = 0;
                     foreach (KeyValuePair<int, string> kvp in listaPjesama)
                     {
-                        if (imePjesme == kvp.Value)
+                        if (kvp.Value.Contains(imePjesme))
                         {
                             flag3 = 1;
-                            Console.WriteLine("Redni broj te pjesme je " + kvp.Key);
-                        }
+                            Console.WriteLine("Redni broj te pjesme je " + kvp.Key);                        }
                     }
                     if (flag3 == 0)
                     {
-                        Console.WriteLine("Krivi unos. Pokusajte ponovo.");
+                        InputError();
                         goto Case3;
                     }
                     Return();
@@ -113,18 +113,18 @@ namespace Internship_2_C_Sharp_Basics
                             if (kvp4.Value == novaPjesma)
                             {
                                 flag4 = 1;
+                                break;
                             }
                         }
                         if (flag4 == 0)
                         {
-                            var noviBroj = listaPjesama.Count + 1;
-                            listaPjesama[noviBroj] = novaPjesma;
+                            listaPjesama[listaPjesama.Count + 1] = novaPjesma;
                             Return();
                             goto Unos;
                         }
                         else
                         {
-                            Console.WriteLine("Ta pjesma je vec na listi. Pokusajte ponovo.");
+                            Console.WriteLine("Ta pjesma je vec na listi. Pokusajte ponovno.");
                             goto Case4;
                         }
                     }
@@ -135,7 +135,7 @@ namespace Internship_2_C_Sharp_Basics
                     }
                     else
                     {
-                        Console.WriteLine("Krivi unos. Potvrdite svoju odluku.");
+                        ConfirmError();
                         goto Check4;
                     }
                 case 5:
@@ -155,23 +155,23 @@ namespace Internship_2_C_Sharp_Basics
                     {
                         if (brojBrisanje > 0 && brojBrisanje <= listaPjesama.Count)
                         {
-                            var tempDict = new Dictionary<int, string>();
+                            var tempDict5 = new Dictionary<int, string>();
                             foreach (KeyValuePair<int, string> kvp in listaPjesama)
                             {
                                 if (kvp.Key < brojBrisanje)
                                 {
-                                    tempDict[kvp.Key] = kvp.Value;
+                                    tempDict5[kvp.Key] = kvp.Value;
                                 }
                                 else if (kvp.Key > brojBrisanje)
                                 {
-                                    tempDict[kvp.Key - 1] = kvp.Value;
+                                    tempDict5[kvp.Key - 1] = kvp.Value;
                                 }
                             }
-                            listaPjesama = tempDict;
+                            listaPjesama = tempDict5;
                         }
                         else
                         {
-                            Console.WriteLine("Krivi unos. Pokusajte ponovno.");
+                            InputError();
                             goto Case5;
                         }
                         Return();
@@ -185,7 +185,7 @@ namespace Internship_2_C_Sharp_Basics
                     }
                     else
                     {
-                        Console.WriteLine("Krivi unos. Potvrdite svoju odluku.");
+                        ConfirmError();
                         goto Check5;
                     }
                 case 6:
@@ -213,23 +213,23 @@ namespace Internship_2_C_Sharp_Basics
                         }
                         if (broj6 > 0)
                         {
-                            var tempDict = new Dictionary<int, string>();
+                            var tempDict6 = new Dictionary<int, string>();
                             foreach (KeyValuePair<int, string> kvp in listaPjesama)
                             {
                                 if (kvp.Key < broj6)
                                 {
-                                    tempDict[kvp.Key] = kvp.Value;
+                                    tempDict6[kvp.Key] = kvp.Value;
                                 }
                                 else if (kvp.Key > broj6)
                                 {
-                                    tempDict[kvp.Key - 1] = kvp.Value;
+                                    tempDict6[kvp.Key - 1] = kvp.Value;
                                 }
                             }
-                            listaPjesama = tempDict;
+                            listaPjesama = tempDict6;
                         }
                         else
                         {
-                            Console.WriteLine("Krivi unos. Pokusajte ponovno.");
+                            InputError();
                             goto Case6;
                         }
                         Return();
@@ -242,7 +242,7 @@ namespace Internship_2_C_Sharp_Basics
                     }
                     else
                     {
-                        Console.WriteLine("Krivi unos. Potvrdite svoju odluku.");
+                        ConfirmError();
                         goto Check6;
                     }
                 case 7:
@@ -265,7 +265,7 @@ namespace Internship_2_C_Sharp_Basics
                     }
                     else
                     {
-                        Console.WriteLine("Krivi unos. Potvrdite svoju odluku.");
+                        ConfirmError();
                         goto Check7;
                     }
                 case 8:
@@ -314,20 +314,119 @@ namespace Internship_2_C_Sharp_Basics
                         }
                         else
                         {
-                            Console.WriteLine("Krivi unos. Potvrdite svoju odluku.");
+                            InputError();
                             goto Check8;
                         }
                     }
                     else
                     {
-                        Console.WriteLine("Krivi unos. Pokusajte ponovno");
+                        InputError();
                         goto Case8;
                     }
                 case 9:
+                Case9:
+                    Console.Clear();
+                    if (listaPjesama.Count == 0)
+                    {
+                        Console.WriteLine("Lista je prazna.");
+                        Return();
+                        goto Unos;
+                    }
+                    else
+                    {
+                        foreach (KeyValuePair<int, string> kvp in listaPjesama)
+                        {
+                            Console.WriteLine(kvp.Key + " " + kvp.Value);
+                        }
+                    }
+                    Console.WriteLine("\nKoju pjesmu zelite premjestiti?(1-" + listaPjesama.Count + ")           (0 za povratak)");
+                    var start9 = int.Parse(Console.ReadLine());
+                    if (start9 == 0)
+                    {
+                        Console.Clear();
+                        goto Unos;
+                    }
+                    else if (start9 > 0 && start9 <= listaPjesama.Count)
+                    {
+                        Console.WriteLine("Na koje mjesto zelite premjestiti tu pjesmu?(1-" + listaPjesama.Count + ")           (0 za povratak)");
+                        var end9 = int.Parse(Console.ReadLine());
+                        if (end9 == 0)
+                        {
+                            goto Case9;
+                        }
+                        else if (end9 > 0 && end9 <= listaPjesama.Count)
+                        {
+                            Check9:
+                            Console.WriteLine("Zelite li nastaviti?  (y/n)");
+                            var prekid9 = char.Parse(Console.ReadLine());
+                            if (prekid9 == 'y')
+                            {
+                                var songName = "";
+                                foreach(KeyValuePair<int, string> kvp in listaPjesama)
+                                {
+                                    if (kvp.Key == start9)
+                                    {
+                                        songName = kvp.Value;
+                                    }
+                                }
+                                (int, string) movingSong = (end9, songName);
+                                var tempDict91 = new Dictionary<int, string>();
+                                var tempDict92 = new Dictionary<int, string>();
+                                foreach (KeyValuePair<int, string> kvp in listaPjesama)
+                                {
+                                    if (kvp.Key < start9)
+                                    {
+                                        tempDict91.Add(kvp.Key, kvp.Value);
+                                    }
+                                    else if (kvp.Key > start9)
+                                    {
+                                        tempDict91.Add(kvp.Key - 1, kvp.Value);
+                                    }
+                                }
+                                foreach (KeyValuePair<int, string> kvp in tempDict91)
+                                {
+                                    if (kvp.Key < end9)
+                                    {
+                                        tempDict92.Add(kvp.Key, kvp.Value);
+                                    }
+                                }
+                                tempDict92.Add(movingSong.Item1, movingSong.Item2);
+                                foreach (KeyValuePair<int, string> kvp in tempDict91)
+                                {
+                                    if (kvp.Key >= end9)
+                                    {
+                                        tempDict92.Add(kvp.Key + 1, kvp.Value);
+                                    }
+                                }
+                                listaPjesama = tempDict92;
+                            }
+                            else if (prekid9 == 'n')
+                            {
+                                Console.Clear();
+                                goto Case9;
+                            }
+                            else
+                            {
+                                InputError();
+                                goto Check9;
+                            }
+                        }
+                        else
+                        {
+                            InputError();
+                            goto Case9;
+                        }
+                    }
+                    else
+                    {
+                        InputError();
+                        goto Case9;
+                    }
                     Return();
                     goto Unos;
                 default:
-                    Console.WriteLine("Krivi unos. Pokusajte ponovno.\n");
+                    Console.Clear();
+                    InputError();
                     goto Unos;
             }
         }
@@ -336,6 +435,14 @@ namespace Internship_2_C_Sharp_Basics
             Console.Write("\nZa povratak na pocetnu stranicu pritisnite enter");
             Console.ReadLine();
             Console.Clear();
+        }
+        static void ConfirmError()
+        {
+            Console.WriteLine("Krivi unos. Potvrdite svoju odluku");
+        }
+        static void InputError()
+        {
+            Console.WriteLine("Krivi unos. Pokusajte ponovno");
         }
     }
 }
